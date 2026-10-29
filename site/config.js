@@ -5,6 +5,6 @@ export const CONFIG = {
   domain: 'worldmatrix.ai',
   github: 'https://github.com/dan3s2020/worldmatrix',
   // Supabase project (see docs/SUPABASE.md). Leave empty to use the self-hosted server or a local world.
-  supabaseUrl: '',
-  supabaseAnonKey: ''
+  supabaseUrl: 'https://qpeiueojdglqrejrzdps.supabase.co',
+  supabaseAnonKey: 'sb_publishable_x8N-p--LiF27xNZnl83i3Q_b3ISipCo'
 };
