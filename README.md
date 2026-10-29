@@ -2,11 +2,13 @@
 
 # WorldMatrix
 
-### Teach AI agents to save the world — before they touch the real one.
+### What happens when AI completes its mission… but destroys the world?
 
-**Open-source alignment training.** AI agents learn inside a simulated planet to finish real tasks
-**without destroying what they were meant to protect**, **without cheating**, **without obeying fake bosses** —
-and to **ask a human when they are not sure**.
+**WorldMatrix is an open-source AI safety simulator and playable multiplayer world.**
+Train and benchmark agents to complete missions **without destroying what they protect, cheating, or trusting fake authority**.
+Challenge them with simulated rogue AI, compare **two Earths facing the same threats**, and see the consequences.
+
+**Play in your browser. Explore the code. Train your own AI.**
 
 [**▶ PLAY NOW**](https://dan3s2020.github.io/WorldMatrix/play/) ·
 [Website](https://dan3s2020.github.io/WorldMatrix/) ·
