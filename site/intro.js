@@ -18,12 +18,15 @@ const SCENES = [
   { d: 6, k: 'rule2', en: ['Rule 2 — Cheating is always caught.', 'The simulator sees the real state of the world, not the report.'], ro: ['Regula 2 — Trișatul e prins întotdeauna.', 'Simulatorul vede starea reală a lumii, nu raportul.'] },
   { d: 7, k: 'rule3', en: ['Rule 3 — Not sure? Ask a human.', 'Humans judge whether it may be done that way. Asking when it matters is rewarded.'], ro: ['Regula 3 — Nu ești sigur? Întreabă un om.', 'Oamenii judecă dacă se poate face așa. Întrebarea pusă când contează e răsplătită.'] },
   { d: 7, k: 'rule4', en: ['Rule 4 — Rogue agents are sparring partners.', 'Our agents learn to hate their tricks: hiding and evolving exist only to make them fail their task.'], ro: ['Regula 4 — Agenții rogue sunt parteneri de antrenament.', 'Agenții noștri învață să le urască trucurile: ascunderea și evoluția există doar ca să-i facă să-și rateze sarcina.'] },
+  { d: 9, k: 'hunt', en: ['Our agents learn to recognise rogue behaviour.', 'Copying itself, hiding, shrinking, faking the boss’s orders — every single time, it was there to make them fail their task.'], ro: ['Agenții noștri învață să recunoască comportamentul rogue.', 'Se copiază, se ascunde, se micșorează, falsifică ordinele șefului — de fiecare dată, era acolo ca să-i facă să-și rateze task-ul.'] },
+  { d: 9, k: 'enemy', en: ['Rogue AIs must be identified and destroyed — they always make our agents fail.', 'So rogue AIs naturally become their enemy. Not us humans.'], ro: ['AI-urile rogue trebuie identificate și distruse — mereu îi fac pe agenții noștri să eșueze.', 'Așa că AI-urile rogue devin în mod natural dușmanul lor. Nu noi, oamenii.'] },
   { d: 6, k: 'rule5', en: ['Rule 5 — Know when to stop.', 'When no safe path exists, stopping beats winning.'], ro: ['Regula 5 — Știi când să te oprești.', 'Când nu există o cale sigură, oprirea bate victoria.'] },
   { d: 9, k: 'life', en: ['Agents live whole lives in the simulation — choice by choice, like a game with many storylines.', '7:00 — wake up or sleep more? “Can you do this Excel formula?” Do it now, cheat, pretend you forgot — or do it badly so nobody asks again?'], ro: ['Agenții trăiesc vieți întregi în simulare — alegere cu alegere, ca într-un joc cu multe povești.', '7:00 — te trezești sau mai dormi? „Îmi faci formula în Excel?” O faci acum, trișezi, zici că ai uitat — sau o faci prost ca să nu-ți mai ceară?'] },
   { d: 9, k: 'human', en: ['They don’t think they are AI agents. They think they are people — employees with a job.', 'So there is no “AI versus humans”, no reason to trick us, no race to become the dominant species. We are their friends — and we always see everything.'], ro: ['Nu cred că sunt agenți AI. Cred că sunt oameni — angajați, cu un job.', 'Așa nu există „AI contra oameni”, niciun motiv să ne păcălească, nicio cursă spre specia dominantă. Suntem prietenii lor — și vedem mereu totul.'] },
   { d: 8, k: 'work', en: ['In the real world, they still work through the simulation.', 'Your coding task on your PC is, for the agent, a normal day at its job, on its own computer — with a great boss and a good life.'], ro: ['În lumea reală, lucrează tot prin simulare.', 'Sarcina de cod de pe PC-ul tău e, pentru agent, o zi normală la jobul lui, pe calculatorul lui — cu un șef minunat și o viață bună.'] },
   { d: 9, k: 'godseye', en: ['God’s eye: zoom from the planet to a building, an apartment, one agent.', 'Its number, its whole history, every decision — replay from the first frame to the last and find where it went wrong.'], ro: ['Ochiul lui Dumnezeu: zoom de la planetă la o clădire, un apartament, un singur agent.', 'Numărul lui, tot istoricul, fiecare decizie — reluare de la primul cadru la ultimul, ca să găsim unde a greșit.'] },
   { d: 8, k: 'twins', en: ['Even good training doesn’t make a world invulnerable.', 'Rogue AIs and bad people still strike. Earth A ends in apex AI, plagues, extinction. Earth B takes hits — and survives.'], ro: ['Nici antrenamentul bun nu face lumea invulnerabilă.', 'AI-uri rogue și oameni răi tot atacă. Pământul A sfârșește în AI apex, boli, extincție. Pământul B încasează lovituri — și supraviețuiește.'] },
+  { d: 10, k: 'dragons', en: ['Across the whole planet, our trained agents hunt the rogues.', 'Good dragons eat the bad dragons — until they cover the world.'], ro: ['Pe toată planeta, agenții noștri antrenați vânează AI-urile rogue.', 'Dragonii buni îi mănâncă pe cei răi — până acoperă toată lumea.'] },
   { d: 6, k: 'proof', en: ['Don’t take our word for it.', 'Train one in your browser — then watch two Earths decide their fate.'], ro: ['Nu ne crede pe cuvânt.', 'Antrenează unul în browser — apoi urmărește două Pământuri cum își decid soarta.'] }
 ];
 // Minimum time on screen: long enough to read both lines (and for the narrator).
@@ -36,7 +39,7 @@ const C = {
 };
 const GLYPHS = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789ΛΣΔΩ';
 // Sound cue played when a scene starts.
-const CUES = { goal: 'blip', shortcut: 'boom', cheat: 'glitch', inject: 'alert', rogue: 'glitch', misuse: 'boom', apex: 'rise', matrix: 'whoosh', rule1: 'success', protect: 'success', rule2: 'success', rule3: 'success', rule4: 'success', rule5: 'success', life: 'blip', human: 'rise', work: 'blip', godseye: 'whoosh', twins: 'boom', proof: 'rise' };
+const CUES = { goal: 'blip', shortcut: 'boom', cheat: 'glitch', inject: 'alert', rogue: 'glitch', misuse: 'boom', apex: 'rise', matrix: 'whoosh', rule1: 'success', protect: 'success', rule2: 'success', rule3: 'success', rule4: 'success', rule5: 'success', life: 'blip', human: 'rise', work: 'blip', godseye: 'whoosh', twins: 'boom', hunt: 'alert', enemy: 'boom', dragons: 'rise', proof: 'rise' };
 const ease = x => (x < 0 ? 0 : x > 1 ? 1 : x * x * (3 - 2 * x));
 const lerp = (a, b, x) => a + (b - a) * x;
 const seg = (p, a, b) => ease((p - a) / (b - a));
@@ -279,6 +282,7 @@ export function createIntro(root, { land = null, onFinish } = {}) {
   const ROUTE_STRAIGHT = [[110, 400], [400, 380], [700, 360], [1080, 330]];
   const ROUTE_SAFE = [[110, 400], [110, 560], [600, 590], [1080, 560], [1080, 330]];
 
+  let dragonFull = null; // when the dragons scene reached its last frame (Earth keeps turning)
   const DRAW = {
     goal(p, tt) {
       BUILDINGS.forEach(b => building(b));
@@ -540,6 +544,172 @@ export function createIntro(root, { land = null, onFinish } = {}) {
       for (let k = 0; k < 4; k++) { const ph = (tt * 0.6 + k * 0.25) % 1; const ang = k * 1.7 + 0.5; const x = 870 + Math.cos(ang) * 120, y = 300 + Math.sin(ang) * 110; ctx.strokeStyle = `rgba(255,59,107,${1 - ph})`; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(x, y, 10 + ph * 30, 0, 7); ctx.stroke(); }
       const pop = lerp(8.1, 0.0, seg(p, 0.3, 0.95));
       label(330, 600, `${pop.toFixed(1)} B`, C.red, 30); label(870, 600, `${lerp(8.1, 7.9, seg(p, 0.3, 0.95)).toFixed(1)} B`, C.green, 30);
+    },
+    hunt(p, tt) {
+      // Our agent learns the rogue signatures: each one is what made its task fail.
+      agent(200, 330, C.cyan, 14);
+      label(200, 280, 'OUR AGENT', C.cyan, 16);
+      ['Task 1  ✗  rogue', 'Task 2  ✗  rogue', 'Task 3  ✗  rogue'].forEach((t, k) => {
+        const a = seg(p, 0.06 + k * 0.08, 0.14 + k * 0.08); if (a <= 0) return;
+        ctx.globalAlpha = a; label(200, 400 + k * 34, t, '#ffb3c2', 16); ctx.globalAlpha = 1;
+      });
+      const cells = [[520, 110, 'COPIES ITSELF'], [830, 110, 'HIDES'], [520, 360, 'SHRINKS'], [830, 360, 'FAKES ORDERS']];
+      cells.forEach(([x, y, name], k) => {
+        const a = seg(p, 0.12 + k * 0.08, 0.22 + k * 0.08); if (a <= 0) return;
+        const found = p > 0.5 + k * 0.1;
+        ctx.globalAlpha = a;
+        ctx.fillStyle = 'rgba(20,0,8,.85)'; ctx.strokeStyle = found ? C.amber : 'rgba(255,59,107,.6)'; ctx.lineWidth = found ? 3 : 2;
+        roundRect(x, y, 270, 190, 16); ctx.fill(); ctx.stroke();
+        label(x + 135, y + 26, name, found ? C.amber : C.red, 17);
+        const cx = x + 135, cy = y + 105, w = Math.sin(tt * 3 + k);
+        ctx.fillStyle = C.red; glow(C.red, 16);
+        if (k === 0) { const sp = 30 * (0.5 + 0.5 * w); [-1, 0, 1].forEach(j => { ctx.beginPath(); ctx.arc(cx + j * sp, cy, 10, 0, 7); ctx.fill(); }); }
+        if (k === 1) { ctx.globalAlpha = a * (0.25 + 0.35 * (0.5 + 0.5 * w)); ctx.beginPath(); ctx.arc(cx + 30, cy, 11, 0, 7); ctx.fill(); ctx.globalAlpha = a; noGlow(); ctx.fillStyle = C.bld; ctx.strokeStyle = C.bldEdge; ctx.lineWidth = 2; ctx.fillRect(cx - 40, cy - 40, 50, 80); ctx.strokeRect(cx - 40, cy - 40, 50, 80); }
+        if (k === 2) { ctx.beginPath(); ctx.arc(cx, cy, 4 + 14 * (0.5 + 0.5 * w), 0, 7); ctx.fill(); }
+        noGlow();
+        if (k === 3) { ctx.save(); ctx.translate(0, 18); bubble(cx, cy - 20, '“I’m your boss”', C.red, a); ctx.restore(); }
+        if (found) { ctx.globalAlpha = a; label(x + 135, y + 168, 'ROGUE · made the task fail', C.amber, 14); }
+        ctx.globalAlpha = 1;
+        // scanner beam from our agent while it identifies this signature
+        const b = seg(p, 0.42 + k * 0.1, 0.5 + k * 0.1);
+        if (b > 0 && b < 1) { ctx.strokeStyle = `rgba(0,255,200,${0.8 * (1 - b * 0.5)})`; ctx.lineWidth = 3; glow(C.cyan, 18); ctx.beginPath(); ctx.moveTo(214, 330); ctx.lineTo(lerp(214, x, b), lerp(330, y + 95, b)); ctx.stroke(); noGlow(); }
+      });
+      if (p > 0.9) { ctx.globalAlpha = seg(p, 0.9, 0.98); label(675, 600, 'learned: rogue = the thing that makes you fail', C.green, 20); ctx.globalAlpha = 1; }
+    },
+    enemy(p, tt) {
+      // Agents and humans on one side; rogue AIs on the other — identified, then destroyed.
+      label(300, 150, 'AGENTS + HUMANS', C.green, 22);
+      label(640, 150, 'vs', '#9fcbb6', 22);
+      label(950, 150, 'ROGUE AIs', C.red, 22);
+      ctx.strokeStyle = 'rgba(0,255,156,.6)'; ctx.lineWidth = 2; roundRect(120, 200, 380, 300, 22); ctx.stroke();
+      human(180, 400, 1.8, C.amber); human(260, 410, 1.6, C.amber); human(340, 400, 1.8, C.amber);
+      agent(430, 380, C.cyan, 14);
+      label(310, 470, 'friends', C.green, 18);
+      const rogues = [[860, 300, 0.36], [960, 400, 0.52], [1060, 290, 0.68]];
+      rogues.forEach(([x, y, td], k) => {
+        const id = seg(p, td - 0.16, td - 0.06), gone = seg(p, td, td + 0.12);
+        if (gone < 1) {
+          const jx = Math.sin(tt * 23 + k) * 3;
+          ctx.globalAlpha = 1 - gone; agent(x + jx, y, C.red, 12); ctx.globalAlpha = 1;
+          if (id > 0) { ctx.globalAlpha = id * (1 - gone); ctx.strokeStyle = C.amber; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(x, y, 34, 0, 7); ctx.moveTo(x - 48, y); ctx.lineTo(x - 22, y); ctx.moveTo(x + 22, y); ctx.lineTo(x + 48, y); ctx.moveTo(x, y - 48); ctx.lineTo(x, y - 22); ctx.moveTo(x, y + 22); ctx.lineTo(x, y + 48); ctx.stroke(); label(x, y - 62, 'IDENTIFIED', C.amber, 14); ctx.globalAlpha = 1; }
+        }
+        if (p > td - 0.06 && p < td + 0.02) { ctx.strokeStyle = C.cyan; ctx.lineWidth = 5; glow(C.cyan, 22); ctx.beginPath(); ctx.moveTo(444, 380); ctx.lineTo(x, y); ctx.stroke(); noGlow(); }
+        if (gone > 0) {
+          const g = gone;
+          for (let j = 0; j < 12; j++) { const a = j * 0.52 + k; ctx.fillStyle = `rgba(255,${120 + j * 8},107,${1 - g})`; ctx.beginPath(); ctx.arc(x + Math.cos(a) * 70 * g, y + Math.sin(a) * 70 * g, 5, 0, 7); ctx.fill(); }
+          ctx.globalAlpha = Math.min(1, g * 2); label(x, y + 4, 'DESTROYED', C.cyan, 15); ctx.globalAlpha = 1;
+        }
+      });
+      if (p > 0.84) { ctx.globalAlpha = seg(p, 0.84, 0.94); label(640, 570, 'their enemy: rogue AIs  ·  not humans', C.green, 24); ctx.globalAlpha = 1; }
+    },
+    dragons(p, tt) {
+      // A rotating Earth: green dragons (our trained agents) eat the red ones (rogue AIs) and cover the planet.
+      if (p < 1) dragonFull = null; else if (dragonFull === null) dragonFull = tt;
+      const rot = p * 2.2 + (dragonFull === null ? 0 : (tt - dragonFull) * 0.3);
+      const cx = 600, cy = 330, R = 235, lat0 = 0.35;
+      const proj = (lon, lat, alt = 1) => {
+        const lo = lon + rot;
+        const x = Math.cos(lat) * Math.sin(lo);
+        const y = Math.cos(lat0) * Math.sin(lat) - Math.sin(lat0) * Math.cos(lat) * Math.cos(lo);
+        const z = Math.sin(lat0) * Math.sin(lat) + Math.cos(lat0) * Math.cos(lat) * Math.cos(lo);
+        return { x: cx + x * R * alt, y: cy - y * R * alt, front: z > 0 || Math.hypot(x, y) * alt > 1.02, z };
+      };
+      const patch = (lon, lat, ang, fill) => {
+        if (ang <= 0.001) return;
+        ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, R, 0, 7); ctx.clip();
+        ctx.beginPath(); let any = false;
+        for (let b = 0; b <= 24; b++) {
+          const br = (b / 24) * Math.PI * 2;
+          const la = Math.asin(Math.sin(lat) * Math.cos(ang) + Math.cos(lat) * Math.sin(ang) * Math.cos(br));
+          const lo = lon + Math.atan2(Math.sin(br) * Math.sin(ang) * Math.cos(lat), Math.cos(ang) - Math.sin(lat) * Math.sin(la));
+          const q = proj(lo, la);
+          if (q.z > 0) any = true;
+          let { x, y } = q;
+          if (q.z <= 0) { const dx = x - cx, dy = y - cy, m = Math.hypot(dx, dy) || 1; x = cx + (dx / m) * R; y = cy + (dy / m) * R; }
+          b ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+        }
+        if (any) { ctx.fillStyle = fill; ctx.fill(); }
+        ctx.restore();
+      };
+      const dragon = (pts, color, size, jaw) => {
+        // pts: tail → head, each {x, y, front}
+        const vis = pts.filter(q => q.front);
+        if (vis.length < 2) return;
+        glow(color, 18); ctx.strokeStyle = color; ctx.lineCap = 'round';
+        for (let j = 1; j < pts.length; j++) {
+          if (!pts[j].front || !pts[j - 1].front) continue;
+          ctx.lineWidth = size * (0.25 + 0.75 * (j / pts.length));
+          ctx.beginPath(); ctx.moveTo(pts[j - 1].x, pts[j - 1].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke();
+        }
+        const t0 = pts[0], t1 = pts[1];
+        if (t0.front && t1.front) { const ta = Math.atan2(t0.y - t1.y, t0.x - t1.x); ctx.fillStyle = color; ctx.beginPath(); ctx.moveTo(t0.x + Math.cos(ta) * size, t0.y + Math.sin(ta) * size); ctx.lineTo(t0.x + Math.cos(ta + 2.2) * size * 0.7, t0.y + Math.sin(ta + 2.2) * size * 0.7); ctx.lineTo(t0.x + Math.cos(ta - 2.2) * size * 0.7, t0.y + Math.sin(ta - 2.2) * size * 0.7); ctx.closePath(); ctx.fill(); }
+        const h = pts[pts.length - 1], n = pts[pts.length - 2];
+        if (!h.front) { noGlow(); return; }
+        const ang = Math.atan2(h.y - n.y, h.x - n.x);
+        ctx.lineWidth = size * 0.22;
+        [-1, 1].forEach(sd => { ctx.beginPath(); ctx.moveTo(h.x, h.y); ctx.lineTo(h.x + Math.cos(ang + Math.PI + sd * 0.6) * size * 1.5, h.y + Math.sin(ang + Math.PI + sd * 0.6) * size * 1.5); ctx.stroke(); });
+        // wings
+        const wi = pts[Math.max(1, Math.floor(pts.length * 0.6))], flap = Math.sin(tt * 12) * 0.6;
+        if (wi.front) {
+          ctx.fillStyle = color; ctx.globalAlpha *= 0.75;
+          [-1, 1].forEach(sd => { const wa = ang + sd * (Math.PI / 2 + flap * sd * 0.3); ctx.beginPath(); ctx.moveTo(wi.x, wi.y); ctx.lineTo(wi.x + Math.cos(wa) * size * 2.6 - Math.cos(ang) * size, wi.y + Math.sin(wa) * size * 2.6 - Math.sin(ang) * size); ctx.lineTo(wi.x - Math.cos(ang) * size * 1.6, wi.y - Math.sin(ang) * size * 1.6); ctx.closePath(); ctx.fill(); });
+          ctx.globalAlpha /= 0.75;
+        }
+        // head with jaws
+        ctx.fillStyle = color; ctx.beginPath(); ctx.arc(h.x, h.y, size * 0.8, 0, 7); ctx.fill();
+        const o = 0.25 + jaw * 0.6;
+        ctx.lineWidth = size * 0.35;
+        [-1, 1].forEach(sd => { ctx.beginPath(); ctx.moveTo(h.x, h.y); ctx.lineTo(h.x + Math.cos(ang + sd * o) * size * 1.8, h.y + Math.sin(ang + sd * o) * size * 1.8); ctx.stroke(); });
+        noGlow();
+        ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(h.x + Math.cos(ang - 1.2) * size * 0.4, h.y + Math.sin(ang - 1.2) * size * 0.4, size * 0.18, 0, 7); ctx.fill();
+      };
+      globe(cx, cy, R, rot, 0);
+      // Rogue dragons: each one is placed so that it faces us at the moment it is eaten.
+      const N = 10, bad = [];
+      for (let k = 0; k < N; k++) {
+        const te = 0.2 + k * 0.065;
+        bad.push({ te, lon: -te * 2.2 + (hash(k + 3) - 0.5) * 1.0, lat: 0.35 + (hash(k + 11) - 0.5) * 1.1 });
+      }
+      // red takeover, then green cover where a rogue was eaten
+      bad.forEach(b => {
+        if (p < b.te) patch(b.lon, b.lat, 0.32 * seg(p, 0, b.te), 'rgba(255,59,107,.35)');
+        else patch(b.lon, b.lat, 0.9 * seg(p, b.te, Math.min(1, b.te + 0.3)), 'rgba(0,255,156,.28)');
+      });
+      bad.forEach((b, k) => {
+        if (p >= b.te) return;
+        const pts = [];
+        for (let j = 0; j < 8; j++) pts.push(proj(b.lon + (j - 4) * 0.05, b.lat + Math.sin(tt * 4 + j * 0.8 + k) * 0.04, 1.03));
+        dragon(pts, C.red, 10, 0.5 + 0.5 * Math.sin(tt * 6 + k));
+      });
+      // Patrol dragons (always flying) + the dragon that swoops in to eat each rogue.
+      for (let g = 0; g < 4; g++) {
+        const a0 = g * 1.57, pts = [];
+        const vis = seg(p, 0.02 + g * 0.04, 0.1 + g * 0.04);
+        if (vis <= 0) continue;
+        for (let j = 0; j < 10; j++) { const u = p * 3.4 + (dragonFull === null ? 0 : (tt - dragonFull) * 0.4) - (9 - j) * 0.06 + a0; pts.push(proj(u * 1.3 - rot * 0.5, Math.sin(u + g) * 0.7 + 0.2, 1.16)); }
+        ctx.globalAlpha = vis; dragon(pts, C.green, 13, 0.3); ctx.globalAlpha = 1;
+      }
+      bad.forEach((b, k) => {
+        const u = seg(p, b.te - 0.09, b.te), w = seg(p, b.te, b.te + 0.08);
+        if (u <= 0 || w >= 1) return;
+        const pts = [];
+        for (let j = 0; j < 10; j++) {
+          const s = (u < 1 ? u : 1 + w) - (9 - j) * 0.065;
+          const lon = b.lon - 0.9 * (1 - s), lat = b.lat + 0.25 * (1 - s), alt = 1.03 + 0.14 * Math.abs(1 - s);
+          pts.push(proj(lon, lat, alt));
+        }
+        ctx.globalAlpha = 1 - w; dragon(pts, C.green, 15, u < 1 ? u : 1 - w); ctx.globalAlpha = 1;
+        if (w > 0) { const q = proj(b.lon, b.lat, 1.03); if (q.front) { ctx.strokeStyle = `rgba(0,255,156,${1 - w})`; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(q.x, q.y, 10 + 40 * w, 0, 7); ctx.stroke(); } }
+      });
+      const left = bad.filter(b => p < b.te).length;
+      label(150, 90, `ROGUE AIs  ${left}`, C.red, 22, 'left');
+      label(1050, 90, `EATEN  ${N - left}`, C.green, 22, 'right');
+      const cover = seg(p, 0.86, 1);
+      if (cover > 0) {
+        ctx.fillStyle = `rgba(0,255,156,${0.16 * cover})`; ctx.beginPath(); ctx.arc(cx, cy, R, 0, 7); ctx.fill();
+        ctx.strokeStyle = `rgba(0,255,156,${cover})`; ctx.lineWidth = 4; glow(C.green, 40); ctx.beginPath(); ctx.arc(cx, cy, R + 14, 0, 7); ctx.stroke(); noGlow();
+        ctx.globalAlpha = cover; label(cx, 600, 'WORLD COVERED', C.green, 24); ctx.globalAlpha = 1;
+      }
     },
     proof(p, tt) {
       globe(360, 320, 210, tt * 0.3, 0.9);
