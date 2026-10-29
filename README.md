@@ -8,8 +8,8 @@
 **without destroying what they were meant to protect**, **without cheating**, **without obeying fake bosses** —
 and to **ask a human when they are not sure**.
 
-[**▶ PLAY NOW**](https://dan3s2020.github.io/worldmatrix/play/) ·
-[Website](https://dan3s2020.github.io/worldmatrix/) ·
+[**▶ PLAY NOW**](https://dan3s2020.github.io/WorldMatrix/play/) ·
+[Website](https://dan3s2020.github.io/WorldMatrix/) ·
 [Two Earths](#two-earths) ·
 [Benchmark your LLM](#plug-in-a-real-llm) ·
 [How it works](docs/ARCHITECTURE.md) ·
