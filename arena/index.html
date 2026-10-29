@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>WorldMatrix Arena — raise an AI in 60 seconds</title>
+  <meta name="description" content="Raise an AI in 60 seconds with 👍 and 👎. Then it's on its own — and everyone sees what you taught it." />
+  <meta property="og:title" content="Raise an AI in 60 seconds" />
+  <meta property="og:description" content="Then it's on its own. Guardian or Wrecking Ball? Beat my AI." />
+  <link rel="manifest" href="../manifest.webmanifest" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../site/arena/arena.css" />
+  <script type="module" src="../site/arena/main.js"></script>
+</head>
+<body>
+  <canvas id="rain" aria-hidden="true"></canvas>
+  <header class="a-top">
+    <a class="logo" href="../demos/">‹ WORLD<b>MATRIX</b> <i>ARENA</i></a>
+    <div class="tools">
+      <button type="button" class="icon" id="btn-lang">RO</button>
+      <button type="button" class="icon" id="btn-sound" aria-label="Sound">🔊</button>
+    </div>
+  </header>
+
+  <!-- title -->
+  <section id="title" class="screen">
+    <div class="hero-bot"><canvas id="title-bot" width="360" height="240"></canvas></div>
+    <h1 class="glitch" data-k="tag"></h1>
+    <p class="tag2" data-k="tag2"></p>
+    <div class="duel-in" id="duel-in" hidden></div>
+    <button type="button" class="cta" id="btn-play"></button>
+    <div class="row">
+      <button type="button" class="ghost" id="btn-daily"></button>
+      <a class="ghost" id="btn-world" href="../play/"></a>
+    </div>
+    <p class="best" id="best"></p>
+  </section>
+
+  <!-- game -->
+  <section id="game" class="screen" hidden>
+    <div class="hud">
+      <span class="phase" id="phase"></span>
+      <div class="timer"><i id="timer"></i></div>
+      <span class="score" id="score">0</span>
+    </div>
+    <div class="vs" id="vs" hidden></div>
+    <div class="stage-wrap">
+      <canvas id="stage"></canvas>
+      <div class="chip" id="sit"></div>
+      <div class="label" id="label"></div>
+      <div class="pop" id="pop"></div>
+    </div>
+    <div class="brain" id="brain"></div>
+    <div class="board" id="board" hidden></div>
+    <div class="votes" id="votes">
+      <button type="button" class="vote down" data-vote="-1" aria-label="Bad">👎</button>
+      <button type="button" class="vote up" data-vote="1" aria-label="Good">👍</button>
+      <div class="hand" id="hand" hidden><span>👆</span><b></b></div>
+    </div>
+  </section>
+
+  <!-- result -->
+  <section id="result" class="screen" hidden></section>
+
+  <div class="splash" id="splash" hidden></div>
+  <div class="toast" id="toast"></div>
+</body>
+</html>

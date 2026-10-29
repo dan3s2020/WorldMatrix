@@ -1,0 +1,28 @@
+name: CI
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Engine + server tests
+        run: npm test
+      - name: Supabase migration on PostgreSQL (grants, RLS, rate limit)
+        run: bash tests/supabase-migration.sh
+      - name: Held-out evaluation (shipped checkpoint vs baselines)
+        run: node cli/worldguard.mjs eval --episodes 1000
+      - name: Python package tests
+        run: npm run test:py
+      - name: Syntax-check TRL examples
+        run: python -m py_compile examples/*.py
+      - name: Browser smoke test (site + game on both hosts, desktop + mobile)
+        run: |
+          pip install playwright
+          python -m playwright install --with-deps chromium
+          npm run test:browser

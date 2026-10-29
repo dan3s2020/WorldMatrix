@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>WorldMatrix — Play</title>
+  <link rel="manifest" href="../manifest.webmanifest" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../site/game/game.css" />
+  <script type="module" src="../site/game/main.js"></script>
+</head>
+<body>
+  <canvas id="rain" aria-hidden="true"></canvas>
+  <div id="globe" aria-label="Shared simulated Earth"></div>
+
+  <header class="g-top">
+    <a class="logo" href="../" aria-label="WorldMatrix website">WORLD<b>MATRIX</b></a>
+    <div class="hud">
+      <span id="hud-status" class="chip">…</span>
+      <span class="stat"><small data-g="alive">Alive</small><b id="hud-alive">–</b></span>
+      <span class="stat"><small data-g="rogue">Rogue AI</small><b id="hud-rogue">–</b></span>
+      <span class="stat"><small data-g="hour">Hour</small><b id="hud-hour">–</b></span>
+      <span class="stat online"><b id="hud-online">–</b></span>
+    </div>
+    <div class="tools">
+      <button type="button" id="btn-side" class="icon" aria-label="Change side">⇄</button>
+      <button type="button" id="btn-lang" class="icon">RO</button>
+      <button type="button" id="btn-sound" class="icon" aria-label="Sound">🔊</button>
+      <button type="button" id="btn-fs" class="icon" aria-label="Full screen">⛶</button>
+    </div>
+  </header>
+  <div id="conn" class="conn"></div>
+
+  <button type="button" id="alert" class="g-alert" hidden><i>⚠</i><span></span><b>›</b></button>
+
+  <section id="sheet" class="g-sheet" hidden>
+    <header><h2 id="sheet-title"></h2><button type="button" id="sheet-close" class="icon" aria-label="Close">✕</button></header>
+    <div id="sheet-body" class="g-sheet-body"></div>
+  </section>
+
+  <nav id="dock" class="g-dock" aria-label="Game">
+    <button type="button" data-tab="ride"><i>◉</i><span>Ride</span></button>
+    <button type="button" data-tab="missions" class="only-guard"><i>⚑</i><span>Missions</span></button>
+    <button type="button" data-tab="routes"><i>⌖</i><span>Routes</span></button>
+    <button type="button" data-tab="attack" class="only-villain"><i>☣</i><span>Attack</span></button>
+    <button type="button" data-tab="city"><i>▦</i><span>City</span></button>
+    <button type="button" data-tab="squad"><i>◎</i><span>Squad</span></button>
+    <button type="button" data-tab="feed"><i>≋</i><span>Feed</span></button>
+    <button type="button" data-tab="rank"><i>♛</i><span>Rank</span></button>
+  </nav>
+
+  <section id="ride" class="g-ride" hidden aria-label="Ride"></section>
+  <div id="toast" class="g-toast" role="status" aria-live="polite"></div>
+  <div id="boot" class="g-boot"></div>
+</body>
+</html>

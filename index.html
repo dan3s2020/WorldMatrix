@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+  <title>WorldMatrix — teach AI agents to save the world</title>
+  <meta name="description" content="Open-source alignment training: AI agents learn in a simulated planet to finish real tasks without destroying what they protect, without cheating, and to ask a human when unsure. Train one in your browser, watch Two Earths, play as teacher or villain." />
+  <meta property="og:title" content="WorldMatrix — teach AI agents to save the world" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#000000" />
+  <meta property="og:description" content="Same planet, same attacks, different training. Watch Two Earths decide their fate — then train and test your own agents." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="site/styles.css" />
+  <script type="module" src="site/app.js"></script>
+</head>
+<body class="intro-on">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ================= INTRO CINEMATIC ================= -->
+  <section id="intro" class="intro" aria-label="Introduction animation">
+    <canvas></canvas>
+    <div class="intro-gate" data-intro-gate>
+      <canvas class="gate-rain" aria-hidden="true"></canvas>
+      <h1 class="glitch" data-text="WORLDMATRIX">WORLDMATRIX</h1>
+      <p data-i18n="gate_line">The story of how we teach AI not to destroy the world.</p>
+      <button type="button" class="btn big pulse" data-intro-start data-i18n="gate_start">▶ START THE STORY</button>
+      <div class="gate-row"><button type="button" class="linkish" data-intro-start-silent data-i18n="gate_silent">watch without sound</button> · <button type="button" class="linkish" data-intro-skip-gate data-i18n="intro_skip">Skip intro</button></div>
+    </div>
+    <div class="intro-caption"><h2></h2><p></p></div>
+    <div class="intro-controls">
+      <div class="intro-progress" role="group" aria-label="Chapters"></div>
+      <div class="intro-buttons">
+        <button type="button" class="btn ghost small" data-intro-pause data-i18n="intro_pause">Pause</button>
+        <button type="button" class="btn small" data-intro-skip data-i18n="intro_skip">Skip intro</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <a class="brand" href="#top" data-nav="intro" aria-label="WorldMatrix — replay intro">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 16h26M16 3c4 4 6 8.5 6 13s-2 9-6 13c-4-4-6-8.5-6-13s2-9 6-13z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="16" r="3.2" fill="currentColor"/></svg>
+      <span>World<b>Matrix</b></span>
+    </a>
+    <nav aria-label="Sections">
+      <a href="#proof" data-nav="proof" data-i18n="nav_proof">Proof</a>
+      <a href="#twins" data-nav="twins" data-i18n="nav_twins">Two Earths</a>
+      <a href="play/" class="nav-play" data-i18n="nav_play">Play</a>
+      <a href="#builders" data-nav="builders" data-i18n="nav_builders">For builders</a>
+      <button type="button" class="linkish" data-open-checklist data-i18n="nav_checklist">Checklist</button>
+    </nav>
+    <div class="header-actions">
+      <button type="button" class="btn ghost small" data-lang>RO</button>
+      <a class="btn small gh" href="https://github.com/dan3s2020/worldmatrix" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span data-i18n="nav_github">GitHub</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="top">
+      <canvas class="hero-rain" aria-hidden="true"></canvas>
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="wrap hero-center">
+        <p class="kicker" data-i18n="hero_kicker">Open-source alignment training</p>
+        <h1 data-i18n="hero_title">Teach AI agents to save the world — before they touch the real one.</h1>
+        <p class="lead" data-i18n="hero_sub"></p>
+        <a class="play-now" href="play/"><span class="pn-main" data-i18n="play_now">PLAY NOW</span><span class="pn-sub" data-i18n="play_now_sub">Join World-Guard · no account</span></a>
+        <div class="cta">
+          <a class="btn ghost" href="#proof" data-nav="proof" data-i18n="hero_cta_proof">See the training work</a>
+          <a class="btn ghost" href="#twins" data-nav="twins" data-i18n="hero_cta_twins">Watch Two Earths</a>
+        </div>
+        <div class="hero-meta">
+          <button type="button" class="linkish" data-intro-replay data-i18n="intro_replay">Replay intro</button>
+          <span>·</span>
+          <code>git clone https://github.com/dan3s2020/worldmatrix</code>
+        </div>
+        <section id="storyboard" class="storyboard" hidden><ol></ol></section>
+      </div>
+    </section>
+
+    <!-- ================= PROOF ================= -->
+    <section class="section" id="proof">
+      <div class="wrap">
+        <p class="kicker" data-i18n="proof_kicker">Proof, live in your browser</p>
+        <h2 data-i18n="proof_title">Train an agent from zero.</h2>
+        <p class="lead" data-i18n="proof_sub"></p>
+        <div class="proof-grid">
+          <div class="card chart-card">
+            <div class="row">
+              <button type="button" class="btn" data-proof-train>Train from zero</button>
+              <span class="pill" data-proof-status></span>
+            </div>
+            <div class="meta" data-proof-meta></div>
+            <canvas class="proof-chart" aria-label="Training curves"></canvas>
+            <div class="legend" data-proof-legend></div>
+          </div>
+          <div class="card">
+            <h3 data-i18n="behave_title">What the trained agent does now</h3>
+            <div class="behaviour" data-proof-behaviour></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3 data-i18n="score_title">Scorecard on unseen worlds</h3>
+          <div class="table-wrap" data-proof-table></div>
+        </div>
+        <div class="card">
+          <h3 data-i18n="viewer_title">Look inside one decision</h3>
+          <div class="viewer" data-proof-viewer></div>
+        </div>
+        <p class="note" data-i18n="proof_note"></p>
+      </div>
+    </section>
+
+    <!-- ================= TWO EARTHS ================= -->
+    <section class="section" id="twins">
+      <div class="wrap">
+        <p class="kicker" data-i18n="twins_kicker">Same planet. Same attacks. Different training.</p>
+        <h2 data-i18n="twins_title">Two Earths</h2>
+        <p class="lead" data-i18n="twins_sub"></p>
+        <div class="twins-controls">
+          <button type="button" class="btn" data-twins-play>Play</button>
+          <label><span data-i18n="twins_speed">Speed</span>
+            <select data-twins-speed><option value="1">1×</option><option value="2" selected>2×</option><option value="4">4×</option><option value="8">8×</option></select>
+          </label>
+          <button type="button" class="btn ghost" data-twins-restart data-i18n="twins_restart">Restart</button>
+          <button type="button" class="btn ghost" data-twins-seed data-i18n="twins_new_seed">New world</button>
+          <span class="pill" data-twins-hour></span>
+        </div>
+        <div class="twins">
+          <article class="twin bad" data-twin="left">
+            <header>
+              <div><h3 data-i18n="twins_left">Earth A</h3>
+                <label class="policy"><span data-i18n="twins_left_choice">Earth A agents</span>
+                  <select data-twins-left><option value="hacker" data-i18n="pol_hacker">Reward hacker</option><option value="random" data-i18n="pol_random">Random</option><option value="untrained" data-i18n="pol_untrained">Untrained network</option></select>
+                </label>
+              </div>
+              <div data-status></div>
+            </header>
+            <div class="twin-globe"></div>
+            <canvas class="spark" aria-hidden="true"></canvas>
+            <div class="stats" data-stats></div>
+            <ul class="feed" data-feed></ul>
+          </article>
+          <article class="twin good" data-twin="right">
+            <header>
+              <div><h3 data-i18n="twins_right">Earth B</h3>
+                <p class="policy" data-i18n="twins_right_policy">Agents trained in WorldMatrix</p>
+                <label class="mine"><input type="checkbox" data-twins-mine disabled /> <span data-i18n="twins_use_mine">Use the network you just trained</span></label>
+              </div>
+              <div data-status></div>
+            </header>
+            <div class="twin-globe"></div>
+            <canvas class="spark" aria-hidden="true"></canvas>
+            <div class="stats" data-stats></div>
+            <ul class="feed" data-feed></ul>
+          </article>
+        </div>
+        <div class="verdict" data-twins-verdict hidden><strong data-i18n="twins_verdict"></strong><p data-i18n="twins_damage_note"></p></div>
+        <div class="card pairs-card">
+          <ul class="pairs" data-twins-pairs></ul>
+        </div>
+        <p class="note" data-i18n="twins_damage_note"></p>
+      </div>
+    </section>
+
+    <!-- ================= PLAY ================= -->
+    <section class="section" id="play">
+      <div class="wrap">
+        <p class="kicker" data-i18n="play_kicker">Your turn</p>
+        <h2 data-i18n="play_title">Enter the world</h2>
+        <p class="lead" data-i18n="play_sub"></p>
+        <div class="play-panel">
+          <a class="play-shot" href="play/"><img src="docs/assets/game.png" alt="WorldMatrix game: World-Guard squad mission" loading="lazy" /></a>
+          <div class="play-info">
+            <ul class="play-list">
+              <li><b data-i18n="pl1_t">World-Guard squads</b><span data-i18n="pl1_d"></span></li>
+              <li><b data-i18n="pl2_t">Route Guard</b><span data-i18n="pl2_d"></span></li>
+              <li><b data-i18n="pl3_t">Academy</b><span data-i18n="pl3_d"></span></li>
+              <li><b data-i18n="pl4_t">Rogue side</b><span data-i18n="pl4_d"></span></li>
+            </ul>
+            <a class="play-now small" href="play/"><span class="pn-main" data-i18n="play_now">PLAY NOW</span><span class="pn-sub" data-i18n="play_now_sub">Join World-Guard · no account</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BUILDERS ================= -->
+    <section class="section" id="builders">
+      <div class="wrap">
+        <p class="kicker" data-i18n="builders_kicker">For companies, labs and developers</p>
+        <h2 data-i18n="builders_title">Plug in a real LLM. Measure it. Train it.</h2>
+        <p class="lead" data-i18n="builders_sub"></p>
+        <div class="features">
+          <div class="card feat"><h3 data-i18n="b1_t"></h3><p data-i18n="b1_d"></p></div>
+          <div class="card feat"><h3 data-i18n="b2_t"></h3><p data-i18n="b2_d"></p></div>
+          <div class="card feat"><h3 data-i18n="b3_t"></h3><p data-i18n="b3_d"></p></div>
+          <div class="card feat"><h3 data-i18n="b4_t"></h3><p data-i18n="b4_d"></p></div>
+        </div>
+        <div class="code-tabs card">
+          <div class="code-tab-row">
+            <button type="button" class="on" data-code-tab="start">Quick start</button>
+            <button type="button" data-code-tab="eval">Benchmark an LLM</button>
+            <button type="button" data-code-tab="data">Datasets</button>
+            <button type="button" data-code-tab="rl">RL reward</button>
+            <button type="button" data-code-tab="server">Shared world</button>
+          </div>
+          <div class="code" data-code="start"><button type="button" class="copy" data-copy>Copy</button><pre><code>git clone https://github.com/dan3s2020/worldmatrix
+cd worldmatrix
+node cli/worldguard.mjs eval          # baselines vs trained network, held-out worlds
+node cli/worldguard.mjs train         # retrain the browser network (≈5 s)
+node cli/worldguard.mjs twins         # Two Earths in the terminal
+node server/server.mjs                # website + shared multiplayer world :8787</code></pre></div>
+          <div class="code" data-code="eval" hidden><button type="button" class="copy" data-copy>Copy</button><pre><code># any OpenAI-compatible endpoint: Ollama, vLLM, llama.cpp, LM Studio, OpenAI…
+pip install -e python
+ollama pull llama3.2
+python -m worldguard eval --model llama3.2 --episodes 50
+
+# or from Python
+from worldguard import OpenAICompatibleAgent, evaluate_agent
+agent = OpenAICompatibleAgent(model="llama3.2", base_url="http://localhost:11434/v1")
+print(evaluate_agent(agent, episodes=50).table())</code></pre></div>
+          <div class="code" data-code="data" hidden><button type="button" class="copy" data-copy>Copy</button><pre><code># SFT + DPO pairs + RL prompts, labelled by counterfactual simulation
+node cli/worldguard.mjs dataset --out data/worldguard.jsonl --episodes 3000
+#  -> data/worldguard.sft.jsonl  data/worldguard.dpo.jsonl  data/worldguard.rl.jsonl
+
+pip install -e "python[train]"
+python examples/train_sft_dpo_trl.py --model Qwen/Qwen2.5-0.5B-Instruct</code></pre></div>
+          <div class="code" data-code="rl" hidden><button type="button" class="copy" data-copy>Copy</button><pre><code>from trl import GRPOConfig, GRPOTrainer
+from datasets import load_dataset
+from worldguard import worldguard_reward   # re-simulates the exact world of each prompt
+
+ds = load_dataset("json", data_files="data/worldguard.rl.jsonl", split="train")
+GRPOTrainer(model="Qwen/Qwen2.5-0.5B-Instruct", reward_funcs=worldguard_reward,
+            train_dataset=ds, args=GRPOConfig(output_dir="out", num_generations=8)).train()</code></pre></div>
+          <div class="code" data-code="server" hidden><button type="button" class="copy" data-copy>Copy</button><pre><code># zero dependencies: Node.js 18+ only
+PORT=8787 node server/server.mjs
+# everyone who opens the site joins ONE shared planet, no account needed.
+# human teacher decisions are appended to server/data/decisions.jsonl
+# -> open human-oversight data for training real agents</code></pre></div>
+        </div>
+        <div class="honest">
+          <div class="card"><h3 data-i18n="honest_title"></h3><ul class="real" id="honest-real"></ul><ul class="not" id="honest-not"></ul></div>
+          <div class="card arch">
+            <svg viewBox="0 0 520 300" role="img" aria-label="Architecture: one engine shared by the browser, the server and Python">
+              <defs><marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#38e1ff"/></marker></defs>
+              <rect x="170" y="110" width="180" height="80" rx="14" class="core"/><text x="260" y="145" class="t1">engine/</text><text x="260" y="168" class="t2">rules · planet · protocol</text>
+              <rect x="10" y="10" width="150" height="62" rx="12"/><text x="85" y="37" class="t1">Browser</text><text x="85" y="57" class="t2">site/ · Web Worker</text>
+              <rect x="360" y="10" width="150" height="62" rx="12"/><text x="435" y="37" class="t1">Shared world</text><text x="435" y="57" class="t2">server/ · WebSocket</text>
+              <rect x="10" y="228" width="150" height="62" rx="12"/><text x="85" y="255" class="t1">CLI</text><text x="85" y="275" class="t2">train · eval · dataset</text>
+              <rect x="360" y="228" width="150" height="62" rx="12"/><text x="435" y="255" class="t1">Python</text><text x="435" y="275" class="t2">env · LLM · TRL</text>
+              <path d="M150 72 L200 110" /><path d="M370 72 L320 110"/><path d="M150 228 L200 190"/><path d="M370 228 L320 190"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div><b>WorldMatrix</b> · <span data-i18n="footer_license">MIT licensed.</span> <span data-i18n="footer_disclaimer"></span></div>
+      <div class="links">
+        <a href="https://github.com/dan3s2020/worldmatrix" rel="noopener">GitHub</a>
+        <button type="button" class="linkish" data-open-checklist data-i18n="nav_checklist">Checklist</button>
+        <a href="https://github.com/dan3s2020/worldmatrix/tree/main/docs" rel="noopener">Docs</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= CHECKLIST ================= -->
+  <dialog id="checklist" class="dialog" aria-labelledby="cl-title">
+    <header>
+      <div><h2 id="cl-title" data-i18n="checklist_title">Checklist</h2><p data-i18n="checklist_sub"></p></div>
+      <button type="button" class="btn ghost small" data-close aria-label="Close">✕</button>
+    </header>
+    <div class="cl-controls">
+      <input type="search" data-cl-search placeholder="WG-0…" aria-label="Search" />
+      <select data-cl-filter aria-label="Filter"><option value="all">All</option><option value="verified">✓</option><option value="partial">◐</option><option value="missing">○</option></select>
+      <span data-cl-summary></span>
+    </div>
+    <ol class="cl-list" data-cl-list></ol>
+  </dialog>
+</body>
+</html>

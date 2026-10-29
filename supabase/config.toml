@@ -1,0 +1,3 @@
+# Minimal Supabase CLI config for WorldMatrix (run `supabase link --project-ref <ref>` once).
+[functions.world-tick]
+verify_jwt = false

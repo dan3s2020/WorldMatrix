@@ -1,0 +1,11 @@
+node_modules/
+.DS_Store
+.env
+.env.*
+*.log
+__pycache__/
+*.egg-info/
+server/data/
+data/*.jsonl
+/checkpoints/
+test-results/

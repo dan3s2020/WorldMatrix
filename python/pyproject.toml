@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "worldguard"
+version = "1.0.0"
+description = "Train and evaluate AI agents (including real LLMs) in a simulated world before they act in the real one."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+dependencies = []  # the engine runs in Node.js; Python only needs the standard library
+
+[project.optional-dependencies]
+gym = ["gymnasium>=0.29"]
+train = ["trl>=0.12", "transformers>=4.44", "datasets>=2.20", "peft>=0.12", "accelerate>=0.33"]
+
+[project.urls]
+Homepage = "https://github.com/dan3s2020/worldmatrix"
+
+[tool.setuptools]
+packages = ["worldguard"]

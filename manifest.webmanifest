@@ -1,0 +1,15 @@
+{
+  "name": "WorldMatrix",
+  "short_name": "WorldMatrix",
+  "description": "A simulated Earth where humans teach AI agents to protect the real one. Join World-Guard or play the rogue.",
+  "start_url": "./play/",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "any",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

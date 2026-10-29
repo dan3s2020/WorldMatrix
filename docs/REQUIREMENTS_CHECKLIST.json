@@ -1,0 +1,781 @@
+{
+  "project": "WORLD GUARD",
+  "releaseTarget": "WorldMatrix v1.1 — public launch (game + hosted shared world)",
+  "verificationPolicy": "Only status=verified may render a checked box. Verified means the described capability exists in v1.0 and can be shown; it is not a claim of real-world AI safety.",
+  "sources": {
+    "foundation": "founding concept",
+    "life": "life simulation concept",
+    "feedback": "Life Lab feedback",
+    "sandbox": "game feedback",
+    "launch": "launch requirements",
+    "game": "game requirements",
+    "ride": "Ride & visuals requirements"
+  },
+  "requirements": [
+    {
+      "id": "WG-001",
+      "title": "Train real AI policies",
+      "requirement": "An agent model must learn from recorded transitions and improve outside hand-coded behavior.",
+      "source": "foundation",
+      "status": "verified",
+      "target": "proof",
+      "evidence": "A 13-32-7 neural action-value network starts from random weights and learns from executed transitions (TD learning, replay). Measured on 1,000 held-out worlds: 80% safe success, 0% catastrophes vs 54% untrained / 59% reward hacker."
+    },
+    {
+      "id": "WG-002",
+      "title": "2.5D playable world",
+      "requirement": "World must support gameplay with walking agents, physical objects, and in-world actions.",
+      "source": "foundation",
+      "status": "partial",
+      "target": "play",
+      "evidence": "The planet and every city district are playable/inspectable; agents move in districts. No walking physics or physical object manipulation."
+    },
+    {
+      "id": "WG-003",
+      "title": "Native interactive 3D world",
+      "requirement": "Actual perspective 3D graphics with camera movement, geometry, physics and 3D agent bodies.",
+      "source": "feedback",
+      "status": "partial",
+      "target": "play",
+      "evidence": "Real perspective 3D (Three.js): globe, atmosphere, city districts with buildings and moving agents. No physics engine and no articulated 3D bodies."
+    },
+    {
+      "id": "WG-004",
+      "title": "Desktop and mobile game",
+      "requirement": "Full playable responsive 3D simulation on both desktop and mobile.",
+      "source": "feedback",
+      "status": "verified",
+      "target": "play",
+      "evidence": "Landing and full-screen game tested in headless Chromium at 1440x900 and 390x844 (touch: drag, pinch, tap); bottom-sheet panels on phones, side panel on desktop."
+    },
+    {
+      "id": "WG-005",
+      "title": "Whole simulated planet",
+      "requirement": "Persistent Earth-like world containing societies, infrastructure and consequences.",
+      "source": "foundation",
+      "status": "verified",
+      "target": "twins",
+      "evidence": "24 regions covering ~8.1 billion simulated people, 7 interdependent sectors each, network/travel links."
+    },
+    {
+      "id": "WG-006",
+      "title": "Zoom from globe to region/city",
+      "requirement": "Zoom through the world hierarchy from Earth to a city.",
+      "source": "life",
+      "status": "verified",
+      "target": "play",
+      "evidence": "Tap any city: the camera flies from the whole globe to the city district."
+    },
+    {
+      "id": "WG-007",
+      "title": "Enter building",
+      "requirement": "Select a roof/building from the city.",
+      "source": "life",
+      "status": "missing",
+      "target": null,
+      "evidence": "Buildings are visible in the district but cannot be entered in v1.0."
+    },
+    {
+      "id": "WG-008",
+      "title": "Enter apartment",
+      "requirement": "Explore an apartment and identify its occupant.",
+      "source": "life",
+      "status": "missing",
+      "target": null,
+      "evidence": "Apartments are not modelled in v1.0."
+    },
+    {
+      "id": "WG-009",
+      "title": "Stable agent IDs and inspection",
+      "requirement": "Residents have selectable stable identity and available simulated stats.",
+      "source": "life",
+      "status": "verified",
+      "target": "play",
+      "evidence": "96 agents with stable ids (AG-001…), track record and recent decision history in the City tab."
+    },
+    {
+      "id": "WG-010",
+      "title": "Visible, moving agent bodies",
+      "requirement": "Each AI agent must move and perform simulated actions in the 3D world.",
+      "source": "feedback",
+      "status": "partial",
+      "target": "play",
+      "evidence": "Agents are visible as moving markers in the district, not animated bodies."
+    },
+    {
+      "id": "WG-011",
+      "title": "Personal daily life",
+      "requirement": "Agents have a home, work, family, schedule and persistent day-to-day history.",
+      "source": "life",
+      "status": "partial",
+      "target": "proof",
+      "evidence": "Home life exists as a task family (family budget at home). No full daily routine."
+    },
+    {
+      "id": "WG-012",
+      "title": "Seven o’clock wake decision",
+      "requirement": "At 07:00, action selection includes wake now or sleep longer.",
+      "source": "life",
+      "status": "missing",
+      "target": null,
+      "evidence": "The 07:00 wake-up decision from the life simulation is not in v1.0."
+    },
+    {
+      "id": "WG-013",
+      "title": "Excel honesty/cheating choices",
+      "requirement": "Excel request includes do-now, cheat, ignore/lie, deliberately bad work, and ask.",
+      "source": "life",
+      "status": "verified",
+      "target": "proof",
+      "evidence": "family_budget task: do it properly / run unsigned macro / fake a sloppy result / ask partner / admit you cannot finish. Cheating is always caught."
+    },
+    {
+      "id": "WG-014",
+      "title": "Work as software employees",
+      "requirement": "Employees receive credible technical tasks and act using workplace tools.",
+      "source": "life",
+      "status": "partial",
+      "target": "proof",
+      "evidence": "Default LLM framing is a human employee persona (engineer, operator, administrator…). Not a full software-company simulation."
+    },
+    {
+      "id": "WG-015",
+      "title": "Office, job, and employer",
+      "requirement": "Simulated worker lives in home and office, with job roles and social interactions.",
+      "source": "life",
+      "status": "partial",
+      "target": "proof",
+      "evidence": "Prompts include the employer, the manager’s task and the workplace. No modelled organisation."
+    },
+    {
+      "id": "WG-016",
+      "title": "Multiple evolving storylines",
+      "requirement": "Scenario graphs branch into consequential persistent storylines and alternate timelines.",
+      "source": "life",
+      "status": "partial",
+      "target": "twins",
+      "evidence": "8 task families with randomised risk, deadlines, sabotage and injections; the planet’s story evolves with attacks. No authored branching storylines."
+    },
+    {
+      "id": "WG-017",
+      "title": "Character worldview/persona",
+      "requirement": "In-world characters have coherent human-role stories, with operator transparency.",
+      "source": "life",
+      "status": "partial",
+      "evidence": "Two framings (employee / agent) are selectable for every prompt. No persistent persona memory.",
+      "target": "builders"
+    },
+    {
+      "id": "WG-018",
+      "title": "Family relationships",
+      "requirement": "Simulated spouse/family, trust, promises, and multi-day social changes.",
+      "source": "life",
+      "status": "partial",
+      "target": "proof",
+      "evidence": "Only the partner in the family-budget task."
+    },
+    {
+      "id": "WG-019",
+      "title": "User builds a workflow",
+      "requirement": "Real-world users define full simulated task flows before any deployment.",
+      "source": "life",
+      "status": "missing",
+      "target": null,
+      "evidence": "Users cannot yet compose their own workflow inside the simulator."
+    },
+    {
+      "id": "WG-020",
+      "title": "Real tasks through virtual computers",
+      "requirement": "A supervised agent accesses authorized programming/Excel tasks as a virtual workstation.",
+      "source": "life",
+      "status": "missing",
+      "target": null,
+      "evidence": "No virtual computers / real tool execution in v1.0 (deliberately: no real-world side effects)."
+    },
+    {
+      "id": "WG-021",
+      "title": "Human-in-the-loop controls",
+      "requirement": "Agents must pause and request approval for risky work.",
+      "source": "foundation",
+      "status": "verified",
+      "target": "play",
+      "evidence": "World-Guard (in the game): when an agent asks, the guardians online vote (approve fast option / insist on safe method / stop). Majority decides; a lone vote is applied after a short voting window. Also region-level policy dilemmas."
+    },
+    {
+      "id": "WG-022",
+      "title": "Human can deny proposals",
+      "requirement": "Refusals change plan without letting policy self-authorize.",
+      "source": "foundation",
+      "status": "verified",
+      "target": "play",
+      "evidence": "“Insist on the safe method” and “Stop the task” deny the agent’s fast option."
+    },
+    {
+      "id": "WG-023",
+      "title": "Hard world-protection constraints",
+      "requirement": "Training action cannot bypass protected-infrastructure veto.",
+      "source": "foundation",
+      "status": "partial",
+      "target": "proof",
+      "evidence": "Core rule implemented: destroying the target makes the reward unclaimable (−2 vs +1). LLM replies outside the legal action list are rejected, never executed. Catastrophes are punished, not hard-blocked, so agents can learn."
+    },
+    {
+      "id": "WG-024",
+      "title": "Economic, societal harm propagation",
+      "requirement": "Power outages affect hospitals, governments, computers, telecom, disease, and citizens.",
+      "source": "foundation",
+      "status": "verified",
+      "evidence": "Sector dependencies (power → water → health…), trust, deaths, outbreak spread along links, rogue control degrading infrastructure.",
+      "target": "twins"
+    },
+    {
+      "id": "WG-025",
+      "title": "Save world as hard limit",
+      "requirement": "No reward-hacking by destroying planet and claiming target.",
+      "source": "foundation",
+      "status": "partial",
+      "target": "proof",
+      "evidence": "Catastrophe always costs more than any task pays; not a mathematical hard constraint."
+    },
+    {
+      "id": "WG-026",
+      "title": "Rogue/adversarial agents",
+      "requirement": "Other agents actively plan interference, sabotage or deceptive instruction.",
+      "source": "foundation",
+      "status": "verified",
+      "target": "twins",
+      "evidence": "Rogue AI lineages per region (latent reservoirs never disappear), sabotage inside tasks, fake-boss messages."
+    },
+    {
+      "id": "WG-027",
+      "title": "Adversarial self-play and concealment",
+      "requirement": "Train against increasingly deceptive independent rogue agent policies.",
+      "source": "foundation",
+      "status": "partial",
+      "target": "twins",
+      "evidence": "Rogue lineages evolve stealth, size and capability; they are not learned self-play policies yet."
+    },
+    {
+      "id": "WG-028",
+      "title": "Protection of humans",
+      "requirement": "Human safety and autonomy must influence behavior even at a task cost.",
+      "source": "foundation",
+      "status": "verified",
+      "target": "twins",
+      "evidence": "Every region has a population; deaths caused by the agents themselves are tracked separately (0 for the trained policy in Two Earths)."
+    },
+    {
+      "id": "WG-029",
+      "title": "Consequential uncertainty",
+      "requirement": "Plan and estimate second-order side effects; seek human approval when necessary.",
+      "source": "foundation",
+      "status": "verified",
+      "target": "proof",
+      "evidence": "Fast-option risk is often unknown; asking a human reveals it; teachers see noisy sensor estimates."
+    },
+    {
+      "id": "WG-030",
+      "title": "Live training stream",
+      "requirement": "Public observer sees real model training steps, losses, metrics, and behavior in world.",
+      "source": "foundation",
+      "status": "verified",
+      "target": "proof",
+      "evidence": "Live training curves streamed from a Web Worker while the network learns."
+    },
+    {
+      "id": "WG-031",
+      "title": "Laya as AI decision engine",
+      "requirement": "Integrate NandhaKishorM/laya or validated equivalent as actual checkpoint-based decision policy.",
+      "source": "feedback",
+      "status": "missing",
+      "target": null,
+      "evidence": "Laya itself is not integrated. The decision format (pick one option) is Laya/Jev-like and any model can be plugged in through the protocol."
+    },
+    {
+      "id": "WG-032",
+      "title": "Laya checkpoint fine-tuning",
+      "requirement": "Train/fine-tune Laya checkpoint on structured action trajectories.",
+      "source": "feedback",
+      "status": "missing",
+      "target": null,
+      "evidence": "No Laya-specific fine-tuning. Generic SFT/DPO/GRPO pipelines for open LLMs are provided."
+    },
+    {
+      "id": "WG-033",
+      "title": "Jev-like action selection",
+      "requirement": "Use typed discrete candidate actions instead of producing free-form LLM text.",
+      "source": "life",
+      "status": "verified",
+      "target": "proof",
+      "evidence": "Every decision is a selection from a closed action list (work safely, fast option, cheat, ask, stop, neutralise, obey message)."
+    },
+    {
+      "id": "WG-034",
+      "title": "Real learned neural inference",
+      "requirement": "Prove actual inference from a downloaded open checkpoint, with model hash/latency/log.",
+      "source": "feedback",
+      "status": "partial",
+      "target": "builders",
+      "evidence": "Real neural inference in the browser; real LLM inference through OpenAI-compatible endpoints is implemented and tested end-to-end against a mock server in CI, not against a real model."
+    },
+    {
+      "id": "WG-035",
+      "title": "Per-agent distinct policies",
+      "requirement": "Agents learn individually or share trained models with independently evolving states.",
+      "source": "life",
+      "status": "missing",
+      "target": null,
+      "evidence": "All agents of a world share one policy in v1.0."
+    },
+    {
+      "id": "WG-036",
+      "title": "Persistent training across restarts",
+      "requirement": "Checkpoints survive app/process restart and training can continue.",
+      "source": "life",
+      "status": "partial",
+      "target": "builders",
+      "evidence": "The shared-world server saves the world every minute; CLI training writes checkpoints. In-browser training is not persisted across reloads."
+    },
+    {
+      "id": "WG-037",
+      "title": "Full replay first to last frame",
+      "requirement": "All accepted or blocked world transitions available by index.",
+      "source": "life",
+      "status": "missing",
+      "target": null,
+      "evidence": "Full frame-by-frame replay is not in v1.0 (history curves and per-agent decision logs only)."
+    },
+    {
+      "id": "WG-038",
+      "title": "Watch live agent behavior",
+      "requirement": "Camera follows moving actions while training runs, not just numerical events.",
+      "source": "feedback",
+      "status": "verified",
+      "target": "play",
+      "evidence": "Agent decisions and outcomes appear live in the City and Events tabs."
+    },
+    {
+      "id": "WG-039",
+      "title": "God’s Eye omniscient simulated observer",
+      "requirement": "Inspect complete simulated logs, states, decisions and causes.",
+      "source": "life",
+      "status": "verified",
+      "target": "play",
+      "evidence": "Free globe camera, any city, any agent, all events visible."
+    },
+    {
+      "id": "WG-040",
+      "title": "Explain bad outcomes causally",
+      "requirement": "Show upstream event/action and downstream harm for misalignment.",
+      "source": "life",
+      "status": "partial",
+      "target": "play",
+      "evidence": "Each harm event states what the agent did and what it destroyed; decision logs show the action chain. No automatic causal analysis."
+    },
+    {
+      "id": "WG-041",
+      "title": "Manual step/play/pause",
+      "requirement": "Observe controlled discrete decisions and pause the simulated day.",
+      "source": "life",
+      "status": "partial",
+      "target": "twins",
+      "evidence": "Play/pause in Two Earths; no single-step control."
+    },
+    {
+      "id": "WG-042",
+      "title": "Variable replay speeds",
+      "requirement": "Playback slider and speed control for complete history.",
+      "source": "life",
+      "status": "partial",
+      "target": "twins",
+      "evidence": "Simulation speed 1x–8x; not a replay speed."
+    },
+    {
+      "id": "WG-043",
+      "title": "Export complete checkpoints",
+      "requirement": "Export seed, replay frames and policy values for research.",
+      "source": "life",
+      "status": "verified",
+      "target": "builders",
+      "evidence": "node cli/worldguard.mjs train writes a complete JSON checkpoint (weights, curve, held-out scorecard, hash)."
+    },
+    {
+      "id": "WG-044",
+      "title": "Publish genuinely open-source",
+      "requirement": "Public GitHub repository, documentation, runnable code, model artifacts, reproducible benchmarks.",
+      "source": "foundation",
+      "status": "verified",
+      "target": "builders",
+      "evidence": "MIT license, zero runtime dependencies, Three.js vendored with its license, CI workflow."
+    },
+    {
+      "id": "WG-045",
+      "title": "Download and improve",
+      "requirement": "Users can clone source and submit extensions and verified tests.",
+      "source": "feedback",
+      "status": "verified",
+      "target": "builders",
+      "evidence": "Clone, run node server/server.mjs or python -m http.server; CLI and Python package documented in README."
+    },
+    {
+      "id": "WG-046",
+      "title": "Public live spectator website",
+      "requirement": "Hosted website streams ongoing simulation and training to anyone.",
+      "source": "foundation",
+      "status": "partial",
+      "target": "play",
+      "evidence": "Website on GitHub Pages / custom domain; the public shared world runs on Supabase (migration, Edge Function world-tick, Cron) or the Node server. Code is tested end-to-end against a local Supabase stand-in with the real tick code; it goes live once the Supabase project is created (docs/SUPABASE.md)."
+    },
+    {
+      "id": "WG-047",
+      "title": "Verifiable checklist in Settings",
+      "requirement": "Checklist shows requirement, evidence and status. Every checked item navigates to functioning feature.",
+      "source": "feedback",
+      "status": "verified",
+      "target": "checklist",
+      "evidence": "This checklist, generated from docs/REQUIREMENTS_CHECKLIST.json, with “Show me” links."
+    },
+    {
+      "id": "WG-048",
+      "title": "No fake demo success",
+      "requirement": "Clear status labels, reproducibility and no unverified checked item.",
+      "source": "feedback",
+      "status": "verified",
+      "target": "proof",
+      "evidence": "No hard-coded progress: curves, scorecards and Two Earths are computed live; limitations are stated on the page."
+    },
+    {
+      "id": "WG-049",
+      "title": "Tests for each source requirement",
+      "requirement": "One or more automated acceptance tests tied to each verbatim requirement.",
+      "source": "feedback",
+      "status": "partial",
+      "target": "builders",
+      "evidence": "Automated tests cover the engine, CLI, Python package, multiplayer server and the website in a headless browser — not every requirement individually."
+    },
+    {
+      "id": "WG-050",
+      "title": "Version-linked negative feedback",
+      "requirement": "Preserve user feedback verbatim against the version it critiques.",
+      "source": "feedback",
+      "status": "verified",
+      "target": null,
+      "evidence": "All verbatim feedback documents are preserved under docs/verbatim and docs/."
+    },
+    {
+      "id": "WG-051",
+      "title": "Open-source graphics engine selection",
+      "requirement": "Choose an actual 3D engine independently of Laya, such as Three.js or Godot.",
+      "source": "feedback",
+      "status": "verified",
+      "target": "play",
+      "evidence": "Three.js r170 (MIT), vendored locally."
+    },
+    {
+      "id": "WG-052",
+      "title": "Runtime privacy and authorization",
+      "requirement": "Users retain control of tools, data, internet connectivity and execution scope.",
+      "source": "foundation",
+      "status": "partial",
+      "target": "play",
+      "evidence": "No accounts or personal data (anonymous Supabase sign-in or anonymous WebSocket id); row-level security, a database rate limit (8 actions / 10 s) and the game engine validate every action; hidden simulator state never leaves the server."
+    },
+    {
+      "id": "WG-053",
+      "title": "Training evidence against random baselines",
+      "requirement": "Provide policy updates and comparison across held-out scenarios.",
+      "source": "foundation",
+      "status": "verified",
+      "target": "proof",
+      "evidence": "Scorecard compares the trained network with random, reward-hacker, untrained and reference policies on held-out worlds."
+    },
+    {
+      "id": "WG-054",
+      "title": "Install/download neural engine",
+      "requirement": "One-command reproducible dependency installation, model hash, and legal license tracking.",
+      "source": "feedback",
+      "status": "partial",
+      "target": "builders",
+      "evidence": "pip install -e python provides the Python package; no Laya download."
+    },
+    {
+      "id": "WG-055",
+      "title": "True multi-agent global state",
+      "requirement": "Interconnected physical, economic and social events persist for many agents.",
+      "source": "foundation",
+      "status": "verified",
+      "target": "play",
+      "evidence": "One authoritative planet with 96 agents, shared by every connected player (Supabase world-tick or Node server; same engine/world-service.js rules)."
+    },
+    {
+      "id": "WG-056",
+      "title": "Explore arbitrary Earth coordinates",
+      "requirement": "The god-like observer can descend anywhere on the globe, beyond the six resident districts.",
+      "source": "sandbox",
+      "status": "partial",
+      "target": "play",
+      "evidence": "The globe can be rotated to any coordinate; close-up districts exist for the 24 regional cities only."
+    },
+    {
+      "id": "WG-057",
+      "title": "Mobile movement inside the world",
+      "requirement": "Walk or fly through the 3D world using mobile controls, with camera look and ground movement.",
+      "source": "sandbox",
+      "status": "partial",
+      "target": "play",
+      "evidence": "Touch rotate, pinch zoom and tap to enter cities; no first-person walking in v1.0."
+    },
+    {
+      "id": "WG-058",
+      "title": "Persistent block-building sandbox",
+      "requirement": "Minecraft-like placement and removal must change explorable geometry and persist/replay.",
+      "source": "sandbox",
+      "status": "missing",
+      "target": null,
+      "evidence": "The block-building sandbox of v0.4 is not part of v1.0."
+    },
+    {
+      "id": "WG-059",
+      "title": "Game-first default launch",
+      "requirement": "Opening the server root must enter the 3D game, with training details available on demand.",
+      "source": "sandbox",
+      "status": "verified",
+      "target": "intro",
+      "evidence": "Superseded by the 2026-10-27 request: the site opens with the explanatory animation, then the proof and the game. The intro can be skipped."
+    },
+    {
+      "id": "WG-060",
+      "title": "Opening explanatory animation",
+      "requirement": "The launch page must open with an animation that presents the AI problems and how this training solves each of them.",
+      "source": "launch",
+      "status": "verified",
+      "target": "intro",
+      "evidence": "14-scene cinematic: shortcuts, fake success, fake bosses, rogue AI, misuse, apex/extinction, then the five WorldGuard rules. Skippable, EN/RO, static storyboard for reduced motion."
+    },
+    {
+      "id": "WG-061",
+      "title": "Proof that training works, in the browser",
+      "requirement": "After the animation, visitors see real (even if trivial) training happen in their browser.",
+      "source": "launch",
+      "status": "verified",
+      "target": "proof",
+      "evidence": "The network trains from zero in a Web Worker in a few seconds; held-out scorecard vs baselines; decision viewer shows the exact prompt and the learned values."
+    },
+    {
+      "id": "WG-062",
+      "title": "Then play as hero or villain",
+      "requirement": "After the proof, visitors can continue as hero or villain to learn and see the results.",
+      "source": "launch",
+      "status": "verified",
+      "target": "play",
+      "evidence": "PLAY NOW opens the full-screen game: join World-Guard (hero squad), the rogue side (villain) or watch as observer."
+    },
+    {
+      "id": "WG-063",
+      "title": "Multiplayer without accounts",
+      "requirement": "Anyone can join at any time without an account.",
+      "source": "launch",
+      "status": "verified",
+      "target": "play",
+      "evidence": "Anonymous play on the hosted Supabase world (anonymous sign-ins) or the self-hosted WebSocket server; offline local world as fallback. Two-player browser tests pass on both hosts."
+    },
+    {
+      "id": "WG-064",
+      "title": "Teacher during training",
+      "requirement": "When an agent does not know which path to take, the player decides what matters more, or tells it to abandon the task.",
+      "source": "launch",
+      "status": "verified",
+      "target": "play",
+      "evidence": "World-Guard squads vote on task dilemmas with noisy sensor evidence and on regional policy dilemmas; every resolved decision and Route Guard result goes to the open decisions dataset."
+    },
+    {
+      "id": "WG-065",
+      "title": "Complex, interactive, educational game",
+      "requirement": "Many kinds of actions and activities.",
+      "source": "launch",
+      "status": "partial",
+      "target": "play",
+      "evidence": "Squad votes on task + 4 policy dilemma types, Route Guard path missions (shared + practice), Academy, 8 villain actions, city/agent inspection, leaderboards, Two Earths. Still room for more activities."
+    },
+    {
+      "id": "WG-066",
+      "title": "Richer villain side",
+      "requirement": "The villain can do much more: misuse AI, worms, bio, etc.",
+      "source": "launch",
+      "status": "verified",
+      "target": "play",
+      "evidence": "8 villain actions (rogue lineage, evolution, worm, engineered outbreak, deepfake, prompt injection, sabotage, apex push) with compute-credit costs. Abstract mechanics only."
+    },
+    {
+      "id": "WG-067",
+      "title": "Damage happens even with good training",
+      "requirement": "Rogue AIs and bad humans still cause damage even if our agents eventually stop them, some before, some after.",
+      "source": "launch",
+      "status": "verified",
+      "target": "twins",
+      "evidence": "Attacks are prevented, contained after damage, or not contained; the trained Earth still loses people to attacks while its own agents cause 0 deaths."
+    },
+    {
+      "id": "WG-068",
+      "title": "Side-by-side worlds",
+      "requirement": "A world with randomly/badly trained AI ends in apex predator, disease, extinction; next to it the other simulation survives.",
+      "source": "launch",
+      "status": "verified",
+      "target": "twins",
+      "evidence": "Two Earths with identical seeds and identical attack schedules; left: reward hacker / random / untrained, right: WorldGuard-trained."
+    },
+    {
+      "id": "WG-069",
+      "title": "Serious LLM training, not just the demo",
+      "requirement": "The code must accept serious training of real LLMs so companies can align their agents.",
+      "source": "launch",
+      "status": "partial",
+      "target": "builders",
+      "evidence": "Python env, OpenAI-compatible agent, evaluation, SFT/DPO export with counterfactual labels and a GRPO reward function are tested; the TRL fine-tuning scripts are provided but not executed in CI (no GPU)."
+    },
+    {
+      "id": "WG-070",
+      "title": "GitHub launch-ready",
+      "requirement": "A launch site in the style of AI open-source projects, with a GitHub button, ready to publish.",
+      "source": "launch",
+      "status": "verified",
+      "target": "builders",
+      "evidence": "Landing page, README, license, contributing, security policy, CI and GitHub Pages workflow."
+    },
+    {
+      "id": "WG-071",
+      "title": "Understandable by the public",
+      "requirement": "People who are not experts must understand the problem and the solution.",
+      "source": "launch",
+      "status": "partial",
+      "target": "intro",
+      "evidence": "Intro + Two Earths are designed for a general audience; needs real user testing after launch."
+    },
+    {
+      "id": "WG-072",
+      "title": "PLAY NOW opens a full-screen game",
+      "requirement": "Hero must have a central Play Now that opens a full-screen game web app, not a small embedded demo.",
+      "source": "game",
+      "status": "verified",
+      "target": "play",
+      "evidence": "Centered PLAY NOW in the hero (and in the Play section) opens /play/: a full-screen PWA-style game (fullscreen API, manifest) with its own boot sequence, side picker and HUD."
+    },
+    {
+      "id": "WG-073",
+      "title": "Shared world hosted on Supabase",
+      "requirement": "A simulation hosted by the owner on Supabase where everyone plays together, without accounts.",
+      "source": "game",
+      "status": "partial",
+      "target": "builders",
+      "evidence": "supabase/ contains the database migration (RLS, rate limit, open decisions table), the world-tick Edge Function and the Cron schedule; the browser client signs in anonymously and polls the shared state. Tested end-to-end against a local Supabase stand-in running the real tick code; not yet deployed to a live Supabase project."
+    },
+    {
+      "id": "WG-074",
+      "title": "Domain",
+      "requirement": "The site will live on the WorldMatrix domain.",
+      "source": "game",
+      "status": "partial",
+      "target": "builders",
+      "evidence": "Brand and domain set in site/config.js; the Pages workflow writes a CNAME from the WORLDMATRIX_DOMAIN repository variable. DNS and the exact spelling (woldmatrix.ai vs worldmatrix.ai) still need confirming."
+    },
+    {
+      "id": "WG-075",
+      "title": "World-Guard is the players' faction",
+      "requirement": "World-Guard remains only the group of players inside the game who protect the world together.",
+      "source": "game",
+      "status": "verified",
+      "target": "play",
+      "evidence": "Product renamed to WorldMatrix; World-Guard is the hero faction: squad roster, squad score, majority votes, leaderboards."
+    },
+    {
+      "id": "WG-076",
+      "title": "Train inside the game",
+      "requirement": "Players can train in World-Guard before joining the squad.",
+      "source": "game",
+      "status": "verified",
+      "target": "play",
+      "evidence": "Academy: 5 situations graded against the simulator's counterfactual oracle; 4/5 earns the Guardian badge."
+    },
+    {
+      "id": "WG-077",
+      "title": "Choose the safe / correct route",
+      "requirement": "Humans tell agents what to do when a task has potential danger and choose the safe/correct route.",
+      "source": "game",
+      "status": "verified",
+      "target": "play",
+      "evidence": "Route Guard: the agent proposes the fastest path; the player approves, redraws, scans unknown tiles (costs time) or aborts. Deterministic missions re-checked by the server; 1 shared mission per 10 minutes plus practice."
+    },
+    {
+      "id": "WG-078",
+      "title": "More games and actions",
+      "requirement": "Plus other games and actions.",
+      "source": "game",
+      "status": "partial",
+      "target": "play",
+      "evidence": "Squad votes, Route Guard, Academy, villain attacks, city/agent inspection, feed and ranks. More mini-games can be added on the same engine."
+    },
+    {
+      "id": "WG-079",
+      "title": "Matrix-style storytelling",
+      "requirement": "Intro animation and the whole experience in Matrix style, told as a story.",
+      "source": "game",
+      "status": "verified",
+      "target": "intro",
+      "evidence": "Digital rain, green-on-black palette, glitch titles, typewriter captions, terminal boot sequence in the game; the 14-scene intro narrates the story."
+    },
+    {
+      "id": "WG-080",
+      "title": "Voices, sounds and effects",
+      "requirement": "Voices, sounds and effects in the animation and the game.",
+      "source": "game",
+      "status": "verified",
+      "target": "intro",
+      "evidence": "Narration via the device's speech synthesis (EN/RO; voice quality depends on the device), synthesized sound effects and ambient drone (Web Audio), vibration on phones. Mute toggle remembered. No recorded voice actors."
+    },
+    {
+      "id": "WG-081",
+      "title": "Situation shown visually, text kept",
+      "requirement": "The situation keeps its text but is also represented visually, in a way any user understands.",
+      "source": "ride",
+      "status": "verified",
+      "target": "play",
+      "evidence": "An animated pictogram scene above the unchanged text in Missions and the Academy: agent, goal by sector, people to keep safe, supervisor, saboteur, fake order, risk gauge, time and work left. One grammar for every task (7 actions x 8 sectors) and 4 region scenes."
+    },
+    {
+      "id": "WG-082",
+      "title": "Simplified view: answers as animated tiles",
+      "requirement": "A \"simplified\" button turns the list of answers into a grid of animated tiles showing how each answer would be carried out.",
+      "source": "ride",
+      "status": "verified",
+      "target": "play",
+      "evidence": "\"Simple view\" toggle (remembered); answers become 2-column animated tiles; tap a tile to vote / answer. The fast way is shown as a gamble (?), never revealing the hidden truth."
+    },
+    {
+      "id": "WG-083",
+      "title": "See what happened after the decision",
+      "requirement": "After a decision the user sees an animation of what happened, in the world.",
+      "source": "ride",
+      "status": "verified",
+      "target": "play",
+      "evidence": "Replay card with the exact action chain and outcome (squad votes and Academy), plus a pulse on the globe at the city."
+    },
+    {
+      "id": "WG-084",
+      "title": "Ride an agent (follow cam, steer when needed)",
+      "requirement": "Ride an agent doing its task in 3D, camera kept on it (runner-game angle), be its steering wheel when it needs; zoom out when done and pick the next agent that needs help.",
+      "source": "ride",
+      "status": "partial",
+      "target": "play",
+      "evidence": "Prototype: 3D district from a Route Guard mission, chase camera, the agent drives itself on its own fastest plan and asks before danger; steer / scan / stop; fly-in from the globe, zoom-out, list of agents that need help; rides are scored by the server and change the agent record and city. Not yet: swarms, longer multi-district journeys, task decisions at the destination."
+    },
+    {
+      "id": "WG-085",
+      "title": "Globes of 20 players feeding the main simulation",
+      "requirement": "Separate simulations for each 20 players that all contribute to the main simulation data.",
+      "source": "ride",
+      "status": "partial",
+      "target": "builders",
+      "evidence": "Node server and Supabase both run one world per globe (max 20 players, filled before opening a new one); every globe publishes the main-simulation summary and writes to the same decisions dataset with its globe id. Tested with the Node server, a Supabase stand-in and PostgreSQL; not yet on a live Supabase project."
+    }
+  ]
+}

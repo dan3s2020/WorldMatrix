@@ -1,0 +1,22 @@
+{
+  "name": "worldguard",
+  "version": "1.0.0",
+  "description": "Open-source alignment training: AI agents learn in a simulated planet to finish tasks without destroying what they protect, without cheating, and to ask humans when unsure.",
+  "type": "module",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/dan3s2020/worldmatrix" },
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node server/server.mjs",
+    "test": "node --test tests/engine.test.mjs tests/game.test.mjs tests/server.test.mjs tests/supabase.test.mjs",
+    "test:py": "cd python && python3 -m unittest discover -s tests -v",
+    "test:browser": "python3 tests/browser_smoke.py",
+    "test:sql": "bash tests/supabase-migration.sh",
+    "sync:supabase": "node scripts/sync-supabase.mjs",
+    "train": "node cli/worldguard.mjs train",
+    "eval": "node cli/worldguard.mjs eval",
+    "twins": "node cli/worldguard.mjs twins",
+    "dataset": "node cli/worldguard.mjs dataset"
+  },
+  "dependencies": {}
+}

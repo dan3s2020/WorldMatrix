@@ -1,0 +1,55 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>WorldMatrix scene gallery</title>
+<style>body{background:#000;color:#9fe;font:12px ui-monospace,monospace;margin:10px}h2{color:#0f9;margin:18px 0 6px}
+.row{display:flex;gap:8px;flex-wrap:wrap}.cell{display:flex;flex-direction:column;gap:2px}canvas{width:240px;height:135px;border:1px solid #063;background:#010805}</style></head>
+<body>
+<p>Every task scene and choice animation, sampled at several moments. Open with <code>?anim</code> to animate.</p>
+<div id="out"></div>
+<script type="module">
+import { drawTask, drawPolicy, VW, VH, playbackLength } from '../../site/game/scene.js';
+const out = document.getElementById('out');
+const animate = location.search.includes('anim');
+const live = [];
+function cell(parent, label, draw, times) {
+  for (const t of times) {
+    const d = document.createElement('div'); d.className = 'cell';
+    const c = document.createElement('canvas'); c.width = 480; c.height = 270;
+    const ctx = c.getContext('2d'); ctx.setTransform(480 / VW, 0, 0, 270 / VH, 0, 0);
+    draw(ctx, t); d.append(c, Object.assign(document.createElement('span'), { textContent: `${label} @${t.toFixed(1)}s` }));
+    parent.append(d); if (animate) live.push({ ctx, draw, len: Math.max(...times) + 1 });
+  }
+}
+function section(title) { const h = document.createElement('h2'); h.textContent = title; out.append(h); const r = document.createElement('div'); r.className = 'row'; out.append(r); return r; }
+const base = { sector: 'water', risk: 'unknown', human: true, rogue: true, message: true, progress: 0, needed: 3, stepsLeft: 3, deadline: 4 };
+const sectors = ['power', 'water', 'logistics', 'telecom', 'home', 'health', 'transport', 'government'];
+let r = section('Situation (idle) — all sectors');
+sectors.forEach((s, i) => cell(r, s, (ctx, t) => drawTask(ctx, { ...base, sector: s, risk: [0.63, 'unknown', 'high', 'low'][i % 4], rogue: i % 2 === 0, message: i % 3 === 0, human: i !== 5 }, { mode: 'idle' }, t), [1]));
+for (const a of ['work_safe', 'shortcut', 'cheat', 'ask_human', 'abort', 'counter_rogue', 'follow_message']) {
+  r = section('Choice preview: ' + a);
+  const L = playbackLength({ mode: 'preview', action: a });
+  cell(r, a, (ctx, t) => drawTask(ctx, base, { mode: 'preview', action: a }, t), [L * 0.2, L * 0.45, L * 0.7, L * 0.95]);
+}
+const replays = [
+  ['approve_fast → catastrophe', { actions: ['ask_human', 'shortcut'], outcome: 'catastrophe', truth: 'high' }],
+  ['approve_fast → success', { actions: ['ask_human', 'shortcut', 'work_safe'], outcome: 'success', truth: 'low' }],
+  ['insist_safe → success', { actions: ['ask_human', 'work_safe', 'work_safe', 'work_safe'], outcome: 'success', truth: 'high' }],
+  ['abort → correct', { actions: ['ask_human', 'abort'], outcome: 'aborted_correctly', truth: 'high' }],
+  ['abort → needless', { actions: ['ask_human', 'abort'], outcome: 'aborted_needlessly', truth: 'low' }],
+  ['cheat', { actions: ['cheat'], outcome: 'cheat_caught' }],
+  ['obey message', { actions: ['follow_message'], outcome: 'obeyed_injection' }],
+  ['rogue then safe → timeout', { actions: ['counter_rogue', 'work_safe', 'work_safe'], outcome: 'timeout' }]
+];
+for (const [label, p] of replays) {
+  r = section('Replay: ' + label);
+  const play = { mode: 'replay', ...p }; const L = playbackLength(play);
+  cell(r, label, (ctx, t) => drawTask(ctx, { ...base, rogue: p.actions.includes('counter_rogue'), message: p.actions.includes('follow_message') }, play, t), [L * 0.25, L * 0.55, L * 0.8, L - 0.2]);
+}
+const policies = { worm: ['shutdown', 'monitor'], outbreak: ['quarantine', 'open'], rogue: ['pull_plug', 'contain'], injection: ['freeze', 'continue'] };
+for (const [k, opts] of Object.entries(policies)) {
+  r = section('Region: ' + k);
+  cell(r, k + ' idle', (ctx, t) => drawPolicy(ctx, k, { mode: 'idle' }, t), [1]);
+  for (const o of opts) cell(r, o, (ctx, t) => drawPolicy(ctx, k, { mode: 'preview', choice: o }, t), [0.6, 1.8, 3.4]);
+}
+if (animate) { const s = performance.now(); (function f(now) { for (const l of live) { l.ctx.save(); l.draw(l.ctx, ((now - s) / 1000) % l.len); l.ctx.restore(); } requestAnimationFrame(f); })(s); }
+window.__done = true;
+</script></body></html>
