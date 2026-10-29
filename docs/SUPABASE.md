@@ -6,7 +6,7 @@ One authoritative WorldMatrix planet that everyone plays, with no accounts.
 browser (play/)  ──anonymous sign-in──▶  Supabase Auth
       │  insert action (vote / villain / route)       ▲
       ▼                                               │
-  actions table ──▶ world-tick Edge Function ◀── Supabase Cron (every 6 s)
+  actions table ──▶ world-tick Edge Function ◀── Supabase Cron (every 10 s)
                      loads world_private, applies actions with the game engine,
                      advances the clock, saves, publishes world_public
       ▲                                               │
@@ -36,7 +36,7 @@ browser (play/)  ──anonymous sign-in──▶  Supabase Auth
    ```sql
    select vault.create_secret('https://<project-ref>.supabase.co', 'project_url');
    select vault.create_secret('<same WORLD_TICK_SECRET>', 'world_tick_secret');
-   select cron.schedule('worldmatrix-tick', '6 seconds', $$
+   select cron.schedule('worldmatrix-tick', '10 seconds', $$
      select net.http_post(
        url := (select decrypted_secret from vault.decrypted_secrets where name = 'project_url') || '/functions/v1/world-tick',
        headers := jsonb_build_object('Content-Type', 'application/json',
@@ -51,7 +51,7 @@ Test without editing files: `https://<site>/play/?supabase=https://<ref>.supabas
 
 ## Costs and limits (free plan, check current pricing)
 
-* One clock call every 6 s ≈ 432,000 Edge Function invocations / month (free plan: 500,000). Every call advances the world by the real elapsed time (1 simulated hour per second), so a slower schedule (e.g. `10 seconds`) keeps the same game speed with fewer calls.
+* One clock call every 10 s ≈ 259,200 Edge Function invocations per 30-day month (free plan: check current quotas). Every call advances the world by the real elapsed time (1 simulated hour per second).
 * Clients poll a small JSON row every 2 s (8 s when the tab is hidden); egress grows with players. Move to a paid plan before a big launch.
 * Free projects pause after a week without activity.
 * Anonymous sign-ins are rate-limited per IP by Supabase Auth.
